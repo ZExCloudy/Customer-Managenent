@@ -27,9 +27,9 @@ function App() {
     if (d.length <= 7) return `${d.slice(0, 4)}-${d.slice(4)}`;
     return `${d.slice(0, 4)}-${d.slice(4, 7)}-${d.slice(7)}`;
   };
-
+const apiUrl = import.meta.env.VITE_API_URL;
   const fetchCustomers = () =>
-    fetch('/customers').then(r => r.json()).then(setCustomers);
+    fetch(`${apiUrl}/customers`).then(r => r.json()).then(setCustomers);
 
   useEffect(() => { fetchCustomers(); }, []);
 
@@ -38,7 +38,7 @@ function App() {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
-    await fetch('/customers', {
+    await fetch(`${apiUrl}/customers`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
