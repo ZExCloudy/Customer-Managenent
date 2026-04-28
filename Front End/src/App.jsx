@@ -48,7 +48,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
   };
 
   const handleDelete = async (id) => {
-    await fetch(`/customers/${id}`, { method: 'DELETE' });
+    await fetch(`${apiUrl}/customers/${id}`, { method: 'DELETE' });
     fetchCustomers();
   };
 
